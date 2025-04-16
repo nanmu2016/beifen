@@ -1,0 +1,42 @@
+{
+  "name": "@nocobase-sample/plugin-hide-help",
+  "version": "0.2.0",
+  "main": "dist/server/index.js",
+  "license": "Apache-2.0",
+  "displayName": "Hide Help Button",
+  "displayName.zh-CN": "隐藏帮助按钮",
+  "description": "A plugin to hide the help button in NocoBase interface",
+  "description.zh-CN": "用于隐藏 NocoBase 界面中帮助按钮的插件",
+  "title": "Hide Help Button Plugin",
+  "title.zh-CN": "隐藏帮助按钮插件",
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": {
+    "url": ""
+  },
+  "keywords": [
+    "nocobase",
+    "plugin",
+    "hide-help",
+    "ui-customization"
+  ],
+  "author": "NocoBase",
+  "dependencies": {},
+  "peerDependencies": {
+    "@nocobase/client": "1.4.x",
+    "@nocobase/server": "1.4.x",
+    "@nocobase/test": "1.4.x",
+    "@nocobase/plugin-auth": "1.4.x"
+  },
+  "devDependencies": {
+    "@nocobase/client": "1.4.x",
+    "@nocobase/server": "1.4.x",
+    "@nocobase/test": "1.4.x"
+  },
+  "scripts": {
+    "build": "nocobase build --tar"
+  }
+} 
