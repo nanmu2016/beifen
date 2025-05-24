@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # beifen
 =======
 # NocoBase Plugin Samples
@@ -42,3 +43,6 @@ yarn dev
 
 Then open [http://localhost:3000](http://localhost:3000) in your browser.
 >>>>>>> 7e945d1 (水印插件完善)
+=======
+# beifen
+>>>>>>> origin/main
