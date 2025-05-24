@@ -1,0 +1,41 @@
+{
+  "name": "@nocobase/plugin-watermark",
+  "version": "0.1.0",
+  "main": "dist/server/index.js",
+  "license": "Apache-2.0",
+  "displayName": "Watermark Plugin",
+  "displayName.zh-CN": "水印插件",
+  "description": "A plugin to add watermark in NocoBase interface",
+  "description.zh-CN": "用于在 NocoBase 界面中添加水印的插件",
+  "title": "Watermark Plugin",
+  "title.zh-CN": "水印插件",
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": {
+    "url": ""
+  },
+  "keywords": [
+    "nocobase",
+    "plugin",
+    "watermark"
+  ],
+  "author": "NocoBase",
+  "dependencies": {},
+  "peerDependencies": {
+    "@nocobase/client": "1.4.x",
+    "@nocobase/server": "1.4.x",
+    "@nocobase/test": "1.4.x",
+    "@nocobase/plugin-auth": "1.4.x"
+  },
+  "devDependencies": {
+    "@nocobase/client": "1.4.x",
+    "@nocobase/server": "1.4.x",
+    "@nocobase/test": "1.4.x"
+  },
+  "scripts": {
+    "build": "nocobase build --tar"
+  }
+} 

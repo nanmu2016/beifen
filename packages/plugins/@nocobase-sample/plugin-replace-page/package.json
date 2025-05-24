@@ -1,0 +1,45 @@
+{
+  "name": "@nocobase-sample/plugin-replace-page",
+  "version": "0.4.0",
+  "main": "dist/server/index.js",
+  "license": "Apache-2.0",
+  "displayName": "Custom Login Page",
+  "displayName.zh-CN": "自定义登录页面",
+  "description": "A plugin to customize the login page layout with a beautiful background image",
+  "description.zh-CN": "一个用于自定义登录页面布局的插件，支持添加精美背景图",
+  "title": "Custom Login Page Plugin",
+  "title.zh-CN": "自定义登录页面插件",
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": {
+    "url": ""
+  },
+  "keywords": [
+    "nocobase",
+    "plugin",
+    "login-page",
+    "custom-layout",
+    "ui-customization"
+  ],
+  "author": "NocoBase",
+  "peerDependencies": {
+    "@nocobase/client": "1.6.x",
+    "@nocobase/server": "1.6.x",
+    "@nocobase/test": "1.6.x",
+    "@nocobase/plugin-auth": "1.6.x"
+  },
+  "devDependencies": {
+    "@nocobase/client": "1.6.x",
+    "@nocobase/server": "1.6.x",
+    "@nocobase/test": "1.6.x",
+    "antd": "^5.12.8",
+    "react": "^18.3.1",
+    "react-router-dom": "^6.3.0"
+  },
+  "scripts": {
+    "build": "nocobase build --tar"
+  }
+}

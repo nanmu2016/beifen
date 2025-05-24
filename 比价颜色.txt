@@ -1,0 +1,134 @@
+function initCustomFormValidation() {
+    var weFormSdk = window.WeFormSDK.getWeFormInstance();
+
+    // 只保留明细表2
+    var detailTable = weFormSdk.convertFieldNameToId("xtypcgsqb_mxb2");
+
+    // 需要监听的字段
+    var fields = ['zhpf', 'swpf', 'js', 'scbj', 'ecbj', 'mlbj'];
+
+    // 为每个字段添加监听
+    fields.forEach(field => {
+        var fieldMark = weFormSdk.convertFieldNameToId(field, detailTable);
+        bindDetailFieldEvent(fieldMark);
+    });
+}
+
+function bindDetailFieldEvent(fieldMark) {
+    var weFormSdk = window.WeFormSDK.getWeFormInstance();
+    weFormSdk.bindFieldChangeEvent(fieldMark, function (data) {
+        handleTable2Fields(data);
+    });
+}
+
+function handleTable2Fields(data) {
+    var fieldId = data.id.slice(5);
+    var field = document.querySelector('[fieldid^="' + fieldId + '"]');
+    
+    if (field) {
+        var tr = field.closest('tr');
+        if (!tr) return;
+
+        // 处理评分字段的颜色
+        handleScoreFields(tr);
+        
+        // 处理报价字段比较
+        handlePriceComparison(tr);
+    }
+}
+
+function handleScoreFields(tr) {
+    // 处理评分字段 (color1, color2, color4)
+    ['color1', 'color2', 'color4'].forEach(colorId => {
+        var field = tr.querySelector(`[id="${colorId}"]`);
+        if (field) {
+            var input = field.querySelector("input") || field.querySelector("span") || field;
+            var value = input.value || input.textContent;
+            field.style.backgroundColor = value ? "" : "red";
+        }
+    });
+}
+
+function handlePriceComparison(tr) {
+    // 获取报价字段 - 修正ID对应关系
+    var scbjField = tr.querySelector('[id="baojia3"]'); // 首次报价
+    var ecbjField = tr.querySelector('[id="baojia1"]'); // 二次报价 (修正)
+    var mlbjField = tr.querySelector('[id="baojia2"]'); // 末轮报价 (修正)
+
+    if (scbjField && ecbjField && mlbjField) {
+        // 获取值并转换为数字
+        var scbj = parseFloat(scbjField.textContent || scbjField.value || 0);
+        var ecbj = parseFloat(ecbjField.textContent || ecbjField.value || 0);
+        var mlbj = parseFloat(mlbjField.textContent || mlbjField.value || 0);
+
+        console.warn('首次报价:', scbj, '二次报价:', ecbj, '末轮报价:', mlbj);
+
+        // 重置颜色
+        ecbjField.style.backgroundColor = "";
+        mlbjField.style.backgroundColor = "";
+
+        // 比较二次报价和首次报价
+        if (scbj && ecbj) {  // 确保两个值都存在
+            if (parseFloat(ecbj) > parseFloat(scbj)) {
+                console.warn('二次报价大于首次报价');
+                ecbjField.style.backgroundColor = "red";
+            }
+        }
+
+        // 比较末轮报价和二次报价
+        if (ecbj && mlbj) {  // 确保两个值都存在
+            if (parseFloat(mlbj) > parseFloat(ecbj)) {
+                console.warn('末轮报价大于二次报价');
+                mlbjField.style.backgroundColor = "red";
+            }
+        }
+    }
+}
+
+// 修改 setupMutationObserver 函数
+function setupMutationObserver() {
+    var targetNode = document.getElementById('table2');
+    if (!targetNode) {
+        console.warn('table2 未找到，检查页面是否正确加载');
+        return;
+    }
+
+    var observer = new MutationObserver(function(mutationsList) {
+        for (var mutation of mutationsList) {
+            if (mutation.type === 'childList') {
+                mutation.addedNodes.forEach(node => {
+                    if (node.nodeType === 1) {
+                        var tr = node.closest('tr');
+                        if (tr) {
+                            handleScoreFields(tr);
+                            handlePriceComparison(tr);
+                        }
+                    }
+                });
+            }
+        }
+    });
+
+    observer.observe(targetNode, { attributes: false, childList: true, subtree: true });
+}
+
+// 修改 formReady 事件处理
+const pageSdk = window.ebuilderSDK.getPageSDK();
+pageSdk.on('formReady', () => {
+    setTimeout(() => {
+        document.querySelectorAll('#table2 tr').forEach(tr => {
+            handleScoreFields(tr);
+            handlePriceComparison(tr);
+        });
+    }, 5000);
+});
+
+// 页面加载完成后设置观察者
+document.addEventListener('DOMContentLoaded', setupMutationObserver);
+
+// 页面加载完成后执行
+if (window.WeFormSDK) {
+    initCustomFormValidation();
+    console.warn("window.WeFormSDK loaded");
+}
+
