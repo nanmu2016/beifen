@@ -1,0 +1,43 @@
+{
+  "name": "@nocobase-sample/plugin-favicon-replace",
+  "version": "1.0.0",
+  "main": "dist/server/index.js",
+  "license": "Apache-2.0",
+  "displayName": "Favicon Replace",
+  "displayName.zh-CN": "网站图标替换",
+  "description": "A plugin to replace website favicon with custom icon",
+  "description.zh-CN": "用于替换网站图标的插件",
+  "title": "Favicon Replace Plugin",
+  "title.zh-CN": "网站图标替换插件",
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": {
+    "url": ""
+  },
+  "keywords": [
+    "nocobase",
+    "plugin",
+    "favicon",
+    "icon",
+    "website",
+    "ui-customization"
+  ],
+  "author": "NocoBase",
+  "dependencies": {},
+  "peerDependencies": {
+    "@nocobase/client": "1.4.x",
+    "@nocobase/server": "1.4.x",
+    "@nocobase/test": "1.4.x"
+  },
+  "devDependencies": {
+    "@nocobase/client": "1.4.x",
+    "@nocobase/server": "1.4.x",
+    "@nocobase/test": "1.4.x"
+  },
+  "scripts": {
+    "build": "nocobase build --tar"
+  }
+}
